@@ -11,7 +11,6 @@ endfunction
 function! UncommentMyLine()
   s:^//\ ::e
 endfunction
-nnoremap <buffer> <leader>m :w<cr> :!/usr/bin/python %<cr>
 
 nnoremap <buffer> <Leader>c :call CommentMyLine()<cr><cr>
 nnoremap <buffer> <Leader>x :call UncommentMyLine()<cr><cr>
