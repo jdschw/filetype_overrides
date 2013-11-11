@@ -17,7 +17,7 @@ nnoremap <buffer> <leader>m :w<cr> :!/usr/bin/python %<cr>
 " vnoremap <buffer> <Leader>c :s/^/#\ /<cr>:noh<cr>
 " vnoremap <buffer> <Leader>x :s/^#\ //<cr>:noh<cr>
 
-nnoremap <script> <buffer> <Leader>c :call <SID>CommentMyPythonLine()<cr><cr>
-nnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyPythonLine()<cr><cr>
-vnoremap <script> <buffer> <Leader>c :call <SID>CommentMyPythonLine()<cr><cr>
-vnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyPythonLine()<cr><cr>
+nnoremap <script> <buffer> <Leader>c :call <SID>CommentMyLine()<cr><cr>
+nnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyLine()<cr><cr>
+vnoremap <script> <buffer> <Leader>c :call <SID>CommentMyLine()<cr><cr>
+vnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyLine()<cr><cr>
