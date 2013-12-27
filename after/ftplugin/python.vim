@@ -30,7 +30,11 @@ vnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyLine()<cr><cr>
 function! GetMyPythonFold(lnum)
   let last_indent = IndentLevel(LastInterestingLine(a:lnum))
   let this_indent = IndentLevel(a:lnum)
-  let next_indent = IndentLevel(NextNonblankLine(a:lnum))
+  let next_indent = IndentLevel(NextNoncommentLine(a:lnum))
+
+  if getline(a:lnum) =~? '^\s*#.*$'
+    return '='
+  endif
 
   if getline(a:lnum) =~? '\v^\s*$'
     if next_indent <= last_indent
@@ -81,12 +85,12 @@ function! LastInterestingLine(lnum)
   return -2
 endfunction
 
-function! NextNonblankLine(lnum)
+function! NextNoncommentLine(lnum)
   let numlines = line('$')
   let current = a:lnum + 1
 
   while current <= numlines
-    if getline(current) =~? '\v\S'
+    if getline(current) =~? '\v\S' && getline(current) !~? '^\s*#.*$'
       return current
     endif
 
