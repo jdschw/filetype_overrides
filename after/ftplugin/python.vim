@@ -40,7 +40,7 @@ function! GetMyPythonFold(lnum)
     if next_indent <= last_indent
       return next_indent
     else
-      return '='
+      return last_indent+1
     endif
   endif
 
@@ -51,7 +51,7 @@ function! GetMyPythonFold(lnum)
     return this_indent
   endif
 
-  return '='
+  return last_indent+1
 endfunction
 
 
