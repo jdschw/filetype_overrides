@@ -1,3 +1,5 @@
+echo "loading vim custom settings..."
+
 " setlocal foldexpr=getline(v:lnum)=~'^\\s*%%\\s.*$'?'>1':getline(v:lnum+1)=~'^\\s*%*$'&&getline(v:lnum+2)=~'^\\s*%%\\s.*$'?'<1':getline(v:lnum+1)=~'^\\s*%%\\s.*$'?'<1':-1
 " setlocal foldexpr=getline(v:lnum)=~'^\\s*"--\\s.*$'?'>1':getline(v:lnum+1)=~'^\\s*"--\\s.*$'?'<1':-1
 setlocal foldexpr=getline(v:lnum)=~'^\\"--.*$'?'>1':getline(v:lnum+1)=~'^\\s*$'&&getline(v:lnum+2)=~'^\\"--.*$'?'<1':-1
