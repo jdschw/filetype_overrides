@@ -6,7 +6,7 @@ setlocal shiftwidth=2
 setlocal foldnestmax=1
 
 function! s:CommentMyLine()
-  s:^://\ :e
+  s:\v^(.+):// \1:e
 endfunction
 function! s:UncommentMyLine()
   s:^//\ ::e
