@@ -26,14 +26,26 @@ nnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyLine()<cr><cr>
 vnoremap <script> <buffer> <Leader>c :call <SID>CommentMyLine()<cr><cr>
 vnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyLine()<cr><cr>
 
-
+"-- GetMyPythonFold
 function! GetMyPythonFold(lnum)
-  let last_indent = IndentLevel(LastInterestingLine(a:lnum))
   let this_indent = IndentLevel(a:lnum)
-  let next_indent = IndentLevel(NextNoncommentLine(a:lnum))
+
+  if IsInterestingLine(a:lnum)
+    return '>' . (this_indent+1)
+  endif
 
   if getline(a:lnum) =~? '^\s*#.*$'
     return '='
+  endif
+
+  let next_indent = IndentLevel(NextNoncommentLine(a:lnum))
+  let lines_of_interest = LastInterestingLine(a:lnum)
+  let last_interesting_line = lines_of_interest[0]
+  let last_predented_line = lines_of_interest[1]
+  let last_indent = IndentLevel(last_interesting_line)
+
+  if last_interesting_line == 0
+    return 0
   endif
 
   if getline(a:lnum) =~? '\v^\s*$'
@@ -44,17 +56,17 @@ function! GetMyPythonFold(lnum)
     endif
   endif
 
-  if IsInterestingLine(a:lnum)
-    return '>' . next_indent
-  endif
-  if this_indent <= last_indent
-    return this_indent
+  if last_interesting_line == last_predented_line
+    return last_indent+1
+  elseif last_indent < IndentLevel(last_predented_line)
+    return last_indent+1
   endif
 
-  return last_indent+1
+  return last_indent
+
 endfunction
 
-
+"-- IsInterestingLine
 function! IsInterestingLine(lnum)
   if getline(a:lnum) =~? '^\s*\(def \|class \).*$'
     return 1
@@ -66,25 +78,38 @@ function! IsInterestingLine(lnum)
 endfunction
 
 
+"-- IndentLevel
 function! IndentLevel(lnum)
   return indent(a:lnum) / &shiftwidth
 endfunction
 
-
+"-- LastInterestingLine
 function! LastInterestingLine(lnum)
   let current = a:lnum
+  let my_indent = IndentLevel(a:lnum)
 
-  while current > 0
-    if IsInterestingLine(current)
-      return current
+  let my_last_interesting_line = 0
+  let my_last_predented_line = 0
+  while current > 0 && (my_last_interesting_line == 0 || my_last_predented_line == 0)
+
+    if my_last_interesting_line == 0 && IsInterestingLine(current)
+      let my_last_interesting_line = current
+    endif
+
+    if my_last_predented_line == 0 &&
+\       getline(current) !~? '^\s*#.*$' &&
+\       getline(current) !~? '\v^\s*$' &&
+\       IndentLevel(current) < my_indent
+      let my_last_predented_line = current
     endif
 
     let current -= 1
   endwhile
 
-  return -2
+  return [my_last_interesting_line, my_last_predented_line]
 endfunction
 
+"-- NextNoncommentLine
 function! NextNoncommentLine(lnum)
   let numlines = line('$')
   let current = a:lnum + 1
