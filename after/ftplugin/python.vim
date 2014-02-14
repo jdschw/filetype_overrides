@@ -9,6 +9,7 @@ setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal nosmartindent
 function! s:CommentMyLine()
+  s/^#\ //e
   s:\v^(.+):# \1:e
 endfunction
 function! s:UncommentMyLine()

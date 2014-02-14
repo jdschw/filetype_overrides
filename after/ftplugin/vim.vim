@@ -6,6 +6,7 @@ setlocal foldexpr=getline(v:lnum)=~'^\\"--.*$'?'>1':getline(v:lnum+1)=~'^\\s*$'&
 setlocal foldmethod=expr
 
 function! s:CommentMyLine()
+  s:^" ::e
   s:\v^(.+):" \1:e
 endfunction
 function! s:UncommentMyLine()
