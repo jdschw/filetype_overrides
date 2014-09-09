@@ -5,6 +5,7 @@ setlocal fo-=t
 setlocal foldmethod=expr
 "setlocal foldexpr=GetMyPythonFold(v:lnum)
 
+setlocal foldnestmax=2
 setlocal tabstop=2
 setlocal shiftwidth=2
 setlocal nosmartindent
