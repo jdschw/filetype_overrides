@@ -1,8 +1,8 @@
 echo "loading cpp custom settings..."
 setlocal foldmethod=syntax
-setlocal tabstop=2
+setlocal tabstop=4
 setlocal formatoptions-=2
-setlocal shiftwidth=2
+setlocal shiftwidth=4
 setlocal foldnestmax=1
 
 function! s:CommentMyLine()
