@@ -6,8 +6,9 @@ setlocal foldmethod=expr
 "setlocal foldexpr=GetMyPythonFold(v:lnum)
 
 setlocal foldnestmax=2
-setlocal tabstop=2
-setlocal shiftwidth=2
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal textwidth=120
 setlocal nosmartindent
 function! s:CommentMyLine()
   s/^#\ //e
