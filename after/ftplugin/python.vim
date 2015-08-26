@@ -24,9 +24,9 @@ nnoremap <buffer> <leader>m :w<cr> :!/usr/bin/python %<cr>
 " vnoremap <buffer> <Leader>x :s/^#\ //<cr>:noh<cr>
 
 nnoremap <script> <buffer> <Leader>c :call <SID>CommentMyLine()<cr><cr>
-nnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyLine()<cr><cr>
+nnoremap <script> <buffer> <Leader>u :call <SID>UncommentMyLine()<cr><cr>
 vnoremap <script> <buffer> <Leader>c :call <SID>CommentMyLine()<cr><cr>
-vnoremap <script> <buffer> <Leader>x :call <SID>UncommentMyLine()<cr><cr>
+vnoremap <script> <buffer> <Leader>u :call <SID>UncommentMyLine()<cr><cr>
 
 "-- GetMyPythonFold
 " All this stuff works, but it takes a long time!!!
